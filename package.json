@@ -4,16 +4,13 @@
   "description": "REST API's con Express y Typescript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sakimay/rest_api_node_ts_server.git"
+    "dev": "nodemon --exec ts-node src/index.ts"
   },
   "author": "Isaac Mayne",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sakimay/rest_api_node_ts_server/issues"
-  },
-  "homepage": "https://github.com/sakimay/rest_api_node_ts_server#readme"
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
 }
