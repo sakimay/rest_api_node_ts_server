@@ -20,11 +20,7 @@ export const getProducts = async (req: Request, res: Response) => {
 export const getProducById = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const product = await Product.findByPk(id,{
-            attributes: {
-                exclude: ['createdAt', 'updatedAt', 'availability']
-            }
-        });
+        const product = await Product.findByPk(id);
         if (!product) {
             res.status(404).json({ message: 'Producto no encontrado' });
         }
@@ -42,3 +38,18 @@ export const createProduct = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error al crear el producto' });
     }
 };
+
+export const updateProduct = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByPk(id);
+        if (!product) {
+            res.status(404).json({ message: 'Producto no encontrado' });
+        }
+        await product.update(req.body);
+        await product.save();
+        res.json({ data: product });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al actualizar el producto' });
+    }
+}
