@@ -17,6 +17,23 @@ export const getProducts = async (req: Request, res: Response) => {
     }
 }
 
+export const getProducById = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByPk(id,{
+            attributes: {
+                exclude: ['createdAt', 'updatedAt', 'availability']
+            }
+        });
+        if (!product) {
+            res.status(404).json({ message: 'Producto no encontrado' });
+        }
+        res.json({ data: product });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al buscar producto' });
+    }
+}
+
 export const createProduct = async (req: Request, res: Response) => {
     try {
         const product = await Product.create(req.body);
